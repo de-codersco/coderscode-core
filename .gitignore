@@ -12,3 +12,6 @@ activator*
 # eclipse
 .classpath
 .project
+bin
+
+.cache
