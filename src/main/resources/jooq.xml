@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+	<!-- Configure the database connection here -->
+	<jdbc>
+		<driver>org.h2.Driver</driver>
+		<url>jdbc:h2:tcp://localhost/mem:cc</url>
+		<user>sa</user>
+		<password></password>
+		<!-- You can also pass user/password and other JDBC properties in the optional 
+			properties tag: -->
+		<!-- <properties> <property> <key>user</key> <value></value> </property> 
+			<property> <key>password</key> <value></value> </property> </properties> -->
+	</jdbc>
+	<generator>
+		<database>
+			<!-- The database dialect from jooq-meta. Available dialects are named 
+				org.util.[database].[database]Database. Known values are: org.jooq.util.ase.ASEDatabase 
+				(to be used with Sybase ASE) org.jooq.util.cubrid.CUBRIDDatabase org.jooq.util.db2.DB2Database 
+				org.jooq.util.derby.DerbyDatabase org.jooq.util.h2.H2Database org.jooq.util.hsqldb.HSQLDBDatabase 
+				org.jooq.util.ingres.IngresDatabase org.jooq.util.mysql.MySQLDatabase org.jooq.util.oracle.OracleDatabase 
+				org.jooq.util.postgres.PostgresDatabase org.jooq.util.sqlite.SQLiteDatabase 
+				org.jooq.util.sqlserver.SQLServerDatabase org.jooq.util.sybase.SybaseDatabase 
+				(to be used with Sybase SQL Anywhere) You can also provide your own org.jooq.util.Database 
+				implementation here, if your database is currently not supported or if you 
+				wish to read the database schema from a file, such as a Hibernate .hbm.xml 
+				file -->
+			<name>org.jooq.util.h2.H2Database</name>
+			<!-- All elements that are generated from your schema (A Java regular 
+				expression. Use the pipe to separate several expressions) Watch out for case-sensitivity. 
+				Depending on your database, this might be important! You can create case-insensitive 
+				regular expressions using this syntax: (?i:expr) -->
+			<includes>.*</includes>
+			<!-- All elements that are excluded from your schema (A Java regular expression. 
+				Use the pipe to separate several expressions). Excludes match before includes -->
+			<excludes>schema_version</excludes>
+			<!-- The schema that is used locally as a source for meta information. 
+				This could be your development schema or the production schema, etc This 
+				cannot be combined with the schemata element. If left empty, jOOQ will generate 
+				all available schemata. See the manual's next section to learn how to generate 
+				several schemata -->
+			<inputSchema>CC</inputSchema>
+
+			<!-- This flag indicates whether include / exclude patterns should also 
+				match columns within tables. -->
+			<includeExcludeColumns>false</includeExcludeColumns>
+			<!-- All table and view columns that are used as "version" fields for 
+				optimistic locking (A Java regular expression. Use the pipe to separate several 
+				expressions). See UpdatableRecord.store() and UpdatableRecord.delete() for 
+				details -->
+			<recordVersionFields>REC_VERSION</recordVersionFields>
+			<!-- All table and view columns that are used as "timestamp" fields for 
+				optimistic locking (A Java regular expression. Use the pipe to separate several 
+				expressions). See UpdatableRecord.store() and UpdatableRecord.delete() for 
+				details -->
+			<recordTimestampFields>REC_TIMESTAMP</recordTimestampFields>
+			<!-- Generate java.sql.Timestamp fields for DATE columns. This is particularly 
+				useful for Oracle databases. Defaults to false -->
+			<dateAsTimestamp>false</dateAsTimestamp>
+			<!-- Generate jOOU data types for your unsigned data types, which are 
+				not natively supported in Java. Defaults to true -->
+			<unsignedTypes>true</unsignedTypes>
+			<!-- The schema that is used in generated source code. This will be the 
+				production schema. Use this to override your local development schema name 
+				for source code generation. If not specified, this will be the same as the 
+				input-schema. -->
+			<outputSchema>CC</outputSchema>
+			<!-- A configuration element to configure several input and/or output 
+				schemata for jooq-meta, in case you're using jooq-meta in a multi- schema 
+				environment. This cannot be combined with the above inputSchema / outputSchema -->
+			<!-- <schemata> <schema> <inputSchema>...</inputSchema> <outputSchema>...</outputSchema> 
+				</schema> [ <schema>...</schema> ... ] </schemata> -->
+			<!-- A configuration element to configure custom data types -->
+			<!-- <customTypes>...</customTypes> -->
+			<!-- A configuration element to configure type overrides for generated 
+				artefacts (e.g. in combination with customTypes) -->
+			<!-- <forcedTypes>...</forcedTypes> -->
+		</database>
+		<generate>
+			<!-- Generation flags: See advanced configuration properties -->
+
+			<!-- Primary key / foreign key relations should be generated and used. 
+				This is a prerequisite for various advanced features. Defaults to true -->
+			<relations>true</relations>
+			<!-- Generate deprecated code for backwards compatibility Defaults to 
+				true -->
+			<deprecated>true</deprecated>
+			<!-- Do not reuse this property. It is deprecated as of jOOQ 3.3.0 -->
+			<instanceFields>true</instanceFields>
+			<!-- Generate the javax.annotation.Generated annotation to indicate jOOQ 
+				version used for source code. Defaults to true -->
+			<generatedAnnotation>true</generatedAnnotation>
+			<!-- Generate jOOQ Record classes for type-safe querying. You can turn 
+				this off, if you don't need "active records" for CRUD Defaults to true -->
+			<records>true</records>
+			<!-- Generate POJOs in addition to Record classes for usage of the ResultQuery.fetchInto(Class) 
+				API Defaults to false -->
+			<pojos>false</pojos>
+			<!-- Generate immutable POJOs for usage of the ResultQuery.fetchInto(Class) 
+				API This overrides any value set in <pojos/> Defaults to false -->
+			<immutablePojos>true</immutablePojos>
+			<!-- Generate interfaces that will be implemented by records and/or pojos. 
+				You can also use these interfaces in Record.into(Class<?>) and similar methods, 
+				to let jOOQ return proxy objects for them. Defaults to false -->
+			<interfaces>false</interfaces>
+			<!-- Generate DAOs in addition to POJO classes Defaults to false -->
+			<daos>true</daos>
+			<!-- Annotate POJOs and Records with JPA annotations for increased compatibility 
+				and better integration with JPA/Hibernate, etc Defaults to false -->
+			<jpaAnnotations>false</jpaAnnotations>
+			<!-- Annotate POJOs and Records with JSR-303 validation annotations Defaults 
+				to false -->
+			<validationAnnotations>false</validationAnnotations>
+			<!-- Allow to turn off the generation of global object references, which 
+				include - Tables.java - Sequences.java - UDTs.java Turning off the generation 
+				of the above files may be necessary for very large schemas, which exceed 
+				the amount of allowed constants in a class's constant pool (64k) or, whose 
+				static initialiser would exceed 64k of byte code Defaults to true -->
+			<globalObjectReferences>true</globalObjectReferences>
+			<!-- Generate fluent setters in - records - pojos - interfaces Fluent 
+				setters are against the JavaBeans specification, but can be quite useful 
+				to those users who do not depend on EL, JSP, JSF, etc. Defaults to false -->
+			<fluentSetters>true</fluentSetters>
+		</generate>
+		<target>
+			<!-- The destination package of your generated classes (within the destination 
+				directory) jOOQ may append the schema name to this package if generating 
+				multiple schemas, e.g. org.jooq.your.packagename.schema1 org.jooq.your.packagename.schema2 -->
+			<packageName>cc</packageName>
+			<!-- The destination directory of your generated classes -->
+			<directory>target/scala-2.11/src_managed/main</directory>
+		</target>
+	</generator>
+</configuration>
+<!-- These properties can be added to the database element: -->
