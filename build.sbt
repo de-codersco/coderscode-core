@@ -1,6 +1,8 @@
 name := """coderscode-core"""
 
-version := "1.0"
+organization := """de.codersco"""
+
+version := "0.0.1-SNAPSHOT"
 
 scalaVersion := "2.11.5"
 
