@@ -13,6 +13,7 @@ install:
 before_script:
   - "java -jar h2-${H2_VERSION}.jar &"
 script:
+  - "${ACTIVATOR_BIN} flywayMigrate"
   - "${ACTIVATOR_BIN} test"
 after_script:
   - "pkill 'jar h2'"
