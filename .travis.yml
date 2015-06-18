@@ -10,9 +10,12 @@ install:
   - wget ${ACTIVATOR_ZIP_URL}
   - unzip -q ${ACTIVATOR_ZIP_FILE}
   - wget ${H2_JAR_URL}
+before_script:
+  - "java -jar h2-${H2_VERSION}.jar &"
 script:
   - "${ACTIVATOR_BIN} test"
-  - "java -jar h2-${H2_VERSION}.jar"
+after_script:
+  - "pkill 'jar h2'"
 notifications:
   # Email notifications are disabled to not annoy anybody.
   email: false
