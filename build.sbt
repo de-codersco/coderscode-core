@@ -33,7 +33,7 @@ fork in run := true
 
 seq(flywaySettings: _*)
 
-flywayUrl := "jdbc:h2:tcp://localhost/mem:cc"
+flywayUrl := "jdbc:h2:tcp://localhost/cc"
 
 flywayUser := "sa"
 
